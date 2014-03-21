@@ -51,7 +51,6 @@ def isWinner(board):
     return False
 
 def horizontal_win(board):
-    last = -10
     for row in board: ##check to find a horizontal win
         last = -10
         for value in row:
