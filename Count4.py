@@ -11,23 +11,19 @@ def run():
     board = [[0]*7 for _ in range(6)]
     display(board)
     turn = 1
-    p1_wins = False
-    p2_wins = False
 
-    while not (p1_wins or p2_wins):      #main game loop
+    while True:      #main game loop
         make_move(board, turn, player_move(board, turn)) #makes moves
 
         if isWinner(board) == True: #checks for winner
             if turn == 1:
                 print "Player 1 wins!"
-                p1_wins = True
             else:
                 print "Player 2 wins!"
-                p2_wins = True
+            return
 
         if tie(board) == True: #handles a tie game
             print "Tie Game!"
-            p1_wins = True
 
         turn = other_player(turn)
 
@@ -79,9 +75,7 @@ def isWinner(board):
                 if board[row][column] == 1:
                     return True
                 elif board[row][column] == 2:
-                    p2_wins = True
-                    print "player 2 wins"
-                    return p2_wins
+                    return True
     col_check = -1
     new_column = None
     for column in range(0, 7): ##check for a win vertically
