@@ -56,9 +56,7 @@ def isWinner(board):
             else:
                 length = length + 1
             if length == 4:
-                if board[row][column] == 1:
-                    return True
-                elif board[row][column] == 2:
+                if board[row][column] in [1, 2]:
                     return True
     col_check = -1
     new_column = None
