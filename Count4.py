@@ -17,11 +17,11 @@ def main_loop(board, turn):
     while True:
         make_move(board, turn, player_move(board, turn)) #makes moves
 
-        if isWinner(board): #checks for winner
+        if isWinner(board):
             print "Player %d wins!" % turn
             return
 
-        if tie(board): #handles a tie game
+        if tie(board):
             print "Tie Game!"
 
         turn = other_player(turn)
