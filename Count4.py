@@ -4,6 +4,9 @@ def display(board):
     for row in board:
         print row
 
+def other_player(player):
+    return 3 - player
+
 def run():
     board = [[0]*7 for _ in range(6)]
     display(board)
@@ -26,10 +29,7 @@ def run():
             print "Tie Game!"
             p1_wins = True
 
-        if turn == 1: ##switches turn
-            turn = 2
-        else:
-            turn = 1
+        turn = other_player(turn)
 
         for row in board: ##prints board
             print row
