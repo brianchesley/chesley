@@ -66,24 +66,23 @@ def isWinner(board):
             if [player for player, run in itertools.groupby(column)
                        if len(list(run)) >= 4 and player in [1, 2]]:
                 return True
-    try:
-        for row in range(0, 4): ## check for a diagonal win. \
-            for column in range(0, 4):
-                if board[row][column] == board[row+1][column+1] == board[row+2][column+2] == board[row+3][column+3]:
-                    if board[row][column] == 1:
-                        return True
-                    elif board[row][column] == 2:
-                        return True
+    for row in range(0, 3): ## check for a diagonal win. \
+        for column in range(0, 4):
+            print row, column
+            if board[row][column] == board[row+1][column+1] == board[row+2][column+2] == board[row+3][column+3]:
+                if board[row][column] == 1:
+                    return True
+                elif board[row][column] == 2:
+                    return True
 
-        for row in range(3, 6): ## check for a diagonal win. /
-            for column in range(0, 4):
-                if board[row][column] == board[row-1][column+1] == board[row-2][column+2] == board[row-3][column+3]:
-                    if board[row][column] == 1:
-                        return True
-                    elif board[row][column] == 2:
-                        return True
-    except IndexError:
-        pass
+    for row in range(3, 6): ## check for a diagonal win. /
+        for column in range(0, 4):
+            print row, column
+            if board[row][column] == board[row-1][column+1] == board[row-2][column+2] == board[row-3][column+3]:
+                if board[row][column] == 1:
+                    return True
+                elif board[row][column] == 2:
+                    return True
 
 def tie(board):
     for row in range(6):
