@@ -1,5 +1,5 @@
 ##Brian Chesley, Connect 4
- 
+
 def run():
     board = []
     for i in range(0,6):
@@ -9,10 +9,10 @@ def run():
     turn = 1
     p1_wins = False
     p2_wins = False
-    
+
     while p1_wins != True and p2_wins != True:      #main game loop
         make_move(board,turn,player_move(board,turn)) #makes moves
-        
+
         if isWinner(board) == True: #checks for winner
             if turn == 1:
                 print "Player 1 wins!"
@@ -20,23 +20,23 @@ def run():
             else:
                 print "Player 2 wins!"
                 p2_wins = True
-        
+
         if tie(board) == True: #handles a tie game
             print "Tie Game!"
-            p1_wins = True  
-    
+            p1_wins = True
+
         if turn == 1: ##switches turn
             turn = 2
         else:
             turn = 1
-    
+
         for row in board: ##prints board
             print row
- 
- 
+
+
 def player_move(board,turn):
     try:
-        player_column = input("what column would you like player %d? " % (turn))                
+        player_column = input("what column would you like player %d? " % (turn))
         while not (1 <= player_column <= 7):
             player_column = input("Please enter a valid column # between 1 and 7 ")
         while board[0][player_column -1] != 0:
@@ -45,7 +45,7 @@ def player_move(board,turn):
     except NameError: ##Still fails when user inputs a space
         print "Please enter a valid column # between 1 and 7  "
     return player_column
- 
+
 def make_move(board,turn,move):
     for row in reversed(range(0,6)):
         if board[row][move-1] == 0:
@@ -57,7 +57,7 @@ def make_move(board,turn,move):
                 break
         else:
             pass
- 
+
 def isWinner(board):
     row_check = -1
     new_row = None
@@ -108,9 +108,9 @@ def isWinner(board):
                         return True
                     elif board[row][column] == 2:
                         return True
-            
+
         for row in range(3,6): ## check for a diagonal win. /
-            for column in range(0,4):       
+            for column in range(0,4):
                 if board[row][column] == board[row-1][column+1] == board[row-2][column+2] == board[row-3][column+3]:
                     if board[row][column] == 1:
                         return True
@@ -118,12 +118,12 @@ def isWinner(board):
                         return True
     except IndexError:
         pass
-        
-def tie(board):     
+
+def tie(board):
     for row in range(6):
         for column in range(7):
             if board[row][column] == 0:
                 return False
-    return True     
- 
+    return True
+
 print run()
