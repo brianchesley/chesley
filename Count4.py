@@ -80,10 +80,8 @@ def isWinner(board):
             return True
 
 def tie(board):
-    for row in range(6):
-        for column in range(7):
-            if board[row][column] == 0:
-                return False
-    return True
+    if all(all(row) for row in board):
+        return True
+    return False
 
 run()
