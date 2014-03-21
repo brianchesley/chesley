@@ -12,7 +12,7 @@ def run():
     p2_wins = False
 
     while not (p1_wins or p2_wins):      #main game loop
-        make_move(board,turn,player_move(board,turn)) #makes moves
+        make_move(board, turn, player_move(board, turn)) #makes moves
 
         if isWinner(board) == True: #checks for winner
             if turn == 1:
@@ -35,7 +35,7 @@ def run():
             print row
 
 
-def player_move(board,turn):
+def player_move(board, turn):
     try:
         player_column = input("what column would you like player %d? " % (turn))
         while not (1 <= player_column <= 7):
@@ -47,8 +47,8 @@ def player_move(board,turn):
         print "Please enter a valid column # between 1 and 7  "
     return player_column
 
-def make_move(board,turn,move):
-    for row in reversed(range(0,6)):
+def make_move(board, turn, move):
+    for row in reversed(range(0, 6)):
         if board[row][move-1] == 0:
             if turn == 1:
                 board[row][move-1] = 1
@@ -63,8 +63,8 @@ def isWinner(board):
     row_check = -1
     new_row = None
     last = -10
-    for row in range(0,6): ##check to find a horizontal win
-        for column in range(0,7):
+    for row in range(0, 6): ##check to find a horizontal win
+        for column in range(0, 7):
             if row != row_check:
                 row_check = row
                 new_row = True
@@ -84,8 +84,8 @@ def isWinner(board):
                     return p2_wins
     col_check = -1
     new_column = None
-    for column in range(0,7): ##check for a win vertically
-        for row in range(0,6):
+    for column in range(0, 7): ##check for a win vertically
+        for row in range(0, 6):
             if column != col_check: ##to make sure columns don't carry over
                 col_check = column
                 new_column = True
@@ -102,16 +102,16 @@ def isWinner(board):
                 elif board[row][column] == 2:
                     return True
     try:
-        for row in range(0,4): ## check for a diagonal win. \
-            for column in range(0,4):
+        for row in range(0, 4): ## check for a diagonal win. \
+            for column in range(0, 4):
                 if board[row][column] == board[row+1][column+1] == board[row+2][column+2] == board[row+3][column+3]:
                     if board[row][column] == 1:
                         return True
                     elif board[row][column] == 2:
                         return True
 
-        for row in range(3,6): ## check for a diagonal win. /
-            for column in range(0,4):
+        for row in range(3, 6): ## check for a diagonal win. /
+            for column in range(0, 4):
                 if board[row][column] == board[row-1][column+1] == board[row-2][column+2] == board[row-3][column+3]:
                     if board[row][column] == 1:
                         return True
