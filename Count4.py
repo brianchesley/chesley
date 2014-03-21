@@ -1,11 +1,12 @@
 ##Brian Chesley, Connect 4
 
-def run():
-    board = []
-    for i in range(0,6):
-        board.append([0]*7)
+def display(board):
     for row in board:
         print row
+
+def run():
+    board = [[0]*7 for _ in range(6)]
+    display(board)
     turn = 1
     p1_wins = False
     p2_wins = False
@@ -126,4 +127,4 @@ def tie(board):
                 return False
     return True
 
-print run()
+run()
