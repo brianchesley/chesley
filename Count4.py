@@ -1,6 +1,5 @@
 ##Brian Chesley, Connect 4
 import itertools
-import operator
 
 def display(board):
     for row in board:
