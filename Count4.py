@@ -15,11 +15,11 @@ def run():
     while True:      #main game loop
         make_move(board, turn, player_move(board, turn)) #makes moves
 
-        if isWinner(board) == True: #checks for winner
+        if isWinner(board): #checks for winner
             print "Player %d wins!" % turn
             return
 
-        if tie(board) == True: #handles a tie game
+        if tie(board): #handles a tie game
             print "Tie Game!"
 
         turn = other_player(turn)
@@ -65,7 +65,7 @@ def isWinner(board):
                 new_row = True
             else:
                 new_row = False
-            if board[row][column] != last or new_row == True:
+            if board[row][column] != last or new_row:
                 last = board[row][column]
                 length = 1
             else:
@@ -84,10 +84,10 @@ def isWinner(board):
                 new_column = True
             else:
                 new_column = False
-            if board[row][column] != last or new_column == True:
+            if board[row][column] != last or new_column:
                 last = board[row][column]
                 length = 1
-            elif board[row][column] == last and new_column == False:
+            elif board[row][column] == last and not new_column:
                 length = length + 1
             if length == 4:
                 if board[row][column] == 1:
