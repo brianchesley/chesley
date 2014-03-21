@@ -1,4 +1,5 @@
 ##Brian Chesley, Connect 4
+import itertools
 
 def display(board):
     for row in board:
@@ -59,25 +60,12 @@ def isWinner(board):
             if length == 4:
                 if value in [1, 2]:
                     return True
-    col_check = -1
-    new_column = None
-    for column in range(0, 7): ##check for a win vertically
-        for row in range(0, 6):
-            if column != col_check: ##to make sure columns don't carry over
-                col_check = column
-                new_column = True
-            else:
-                new_column = False
-            if board[row][column] != last or new_column:
-                last = board[row][column]
-                length = 1
-            elif board[row][column] == last and not new_column:
-                length = length + 1
-            if length == 4:
-                if board[row][column] == 1:
-                    return True
-                elif board[row][column] == 2:
-                    return True
+    columns = zip(*board)
+    for player in [1, 2]:
+        for column in columns:
+            if [player for player, run in itertools.groupby(column)
+                       if len(list(run)) >= 4 and player in [1, 2]]:
+                return True
     try:
         for row in range(0, 4): ## check for a diagonal win. \
             for column in range(0, 4):
