@@ -49,6 +49,11 @@ def make_move(board, turn, move):
             break
 
 def isWinner(board):
+    if horizontal_win(board) or vertical_win(board) or diagonal_win(board):
+        return True
+    return False
+
+def horizontal_win(board):
     last = -10
     for row in board: ##check to find a horizontal win
         last = -10
@@ -61,12 +66,16 @@ def isWinner(board):
             if length == 4:
                 if value in [1, 2]:
                     return True
+
+def vertical_win(board):
     columns = zip(*board)
     for player in [1, 2]:
         for column in columns:
             if [player for player, run in itertools.groupby(column)
                        if len(list(run)) >= 4 and player in [1, 2]]:
                 return True
+
+def diagonal_win(board):
     ways = []
     for row in range(0, 3): ## check for a diagonal win. \
         for column in range(0, 4):
