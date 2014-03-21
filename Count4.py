@@ -24,9 +24,7 @@ def run():
 
         turn = other_player(turn)
 
-        for row in board: ##prints board
-            print row
-
+        display(board)
 
 def player_move(board, turn):
     while True:
