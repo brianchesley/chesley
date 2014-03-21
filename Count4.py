@@ -16,10 +16,7 @@ def run():
         make_move(board, turn, player_move(board, turn)) #makes moves
 
         if isWinner(board) == True: #checks for winner
-            if turn == 1:
-                print "Player 1 wins!"
-            else:
-                print "Player 2 wins!"
+            print "Player %d wins!" % turn
             return
 
         if tie(board) == True: #handles a tie game
