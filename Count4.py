@@ -48,15 +48,16 @@ def make_move(board, turn, move):
 
 def isWinner(board):
     last = -10
-    for row in range(0, 6): ##check to find a horizontal win
-        for column in range(0, 7):
-            if board[row][column] != last or row == 0:
-                last = board[row][column]
+    for row in board: ##check to find a horizontal win
+        last = -10
+        for value in row:
+            if value != last:
+                last = value
                 length = 1
             else:
                 length = length + 1
             if length == 4:
-                if board[row][column] in [1, 2]:
+                if value in [1, 2]:
                     return True
     col_check = -1
     new_column = None
