@@ -11,9 +11,10 @@ def other_player(player):
 def run():
     board = [[0]*7 for _ in range(6)]
     display(board)
-    turn = 1
+    main_loop(board, 1)
 
-    while True:      #main game loop
+def main_loop(board, turn):
+    while True:
         make_move(board, turn, player_move(board, turn)) #makes moves
 
         if isWinner(board): #checks for winner
