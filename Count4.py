@@ -86,8 +86,6 @@ def diagonal_win(board):
             return True
 
 def tie(board):
-    if all(all(row) for row in board):
-        return True
-    return False
+    return all(all(row) for row in board)
 
 run()
