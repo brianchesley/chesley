@@ -11,7 +11,7 @@ def run():
     p1_wins = False
     p2_wins = False
 
-    while p1_wins != True and p2_wins != True:      #main game loop
+    while not (p1_wins or p2_wins):      #main game loop
         make_move(board,turn,player_move(board,turn)) #makes moves
 
         if isWinner(board) == True: #checks for winner
