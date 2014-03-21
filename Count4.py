@@ -43,14 +43,8 @@ def player_move(board, turn):
 def make_move(board, turn, move):
     for row in reversed(range(0, 6)):
         if board[row][move-1] == 0:
-            if turn == 1:
-                board[row][move-1] = 1
-                break
-            else:
-                board[row][move-1] = 2
-                break
-        else:
-            pass
+            board[row][move-1] = turn
+            break
 
 def isWinner(board):
     row_check = -1
