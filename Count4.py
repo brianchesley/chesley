@@ -32,16 +32,18 @@ def run():
 
 
 def player_move(board, turn):
-    try:
-        player_column = input("what column would you like player %d? " % (turn))
-        while not (1 <= player_column <= 7):
-            player_column = input("Please enter a valid column # between 1 and 7 ")
-        while board[0][player_column -1] != 0:
-            player_column = input("This column is full. Enter a different one ")
-            break
-    except NameError: ##Still fails when user inputs a space
-        print "Please enter a valid column # between 1 and 7  "
-    return player_column
+    while True:
+        try:
+            player_column = int(raw_input( "what column would you like player %d? " % (turn,)))
+        except ValueError:
+            print "Please enter a valid column # between 1 and 7"
+        else:
+            if not (1 <= player_column <= 7):
+                print "Please enter a valid column # between 1 and 7"
+            elif board[0][player_column -1] != 0:
+                print "This column is full. Enter a different one"
+            else:
+                return player_column
 
 def make_move(board, turn, move):
     for row in reversed(range(0, 6)):
