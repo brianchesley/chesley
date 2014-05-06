@@ -10,17 +10,17 @@ def other_player(turn):
     return 3 - turn
 
 def player_move(board,turn):
-    row = int(raw_input("what row would you like player %s? " % (turn,)))
-    column = int(raw_input("what column would you like player %s? " % (turn,)))
-    while not (1 <= row <= 3 and 1 <= column <= 3)\
-    or board[row-1][column-1] != "":
-        row = int(raw_input\
-        ("That coordinate is not available. What row would you like player %s? " % (turn,)))
-        column = int(raw_input("what column would you like player %s? " % (turn,)))
+    row = int(raw_input("What row would you like player %s? " % (turn,)))
+    column = int(raw_input("What column would you like player %s? " % (turn,)))
+    while (not (1 <= row <= 3 and 1 <= column <= 3)
+        or board[row-1][column-1] != ""):
+        row = int(raw_input("That coordinate is not available."
+                            "What row would you like player %s? " % (turn,)))
+        column = int(raw_input("What column would you like player %s? " % (turn,)))
     return (row-1, column-1)
 
 def game_type():
-    choice = raw_input("Hello! Would you like to play against the Computer? Click 1 for yes. ")
+    choice = raw_input("Hello! Would you like to play against the Computer? Type 1 for yes. ")
     if choice == str(1):
         return True
 
