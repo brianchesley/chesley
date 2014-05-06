@@ -4,7 +4,7 @@ import collections
 
 def display_board(board):
     print
-    print " ".join(board)
+    print "\n-----\n".join("|".join(str(x) if x else ' ' for x in row) for row in board)
 
 def other_player(turn):
     return 3 - turn
@@ -37,88 +37,24 @@ def make_move(board,turn,move):
     board[move[0]][move[1]] = turn
 
 def main():
-    """instead of having two separate loops I wanted to have an if statement that created
-    player1 player 2 variables depending upon random selection, but every time I did this 
-    I got an infinite loop that kept printing out the game board after 1 "correct" interation
-    code below
-
-    if random_selection():
-        playerOne = player_move(board,turn)
-        playerTwo = computer_AI(board,turn)
-    else:
-        playerTwo = player_move(board,turn)
-        playerOne = computer_AI(board,turn)
-    while True: ...
-
-    The problem with this code is that you're calling the function player_move, which returns a move!
-    What you want instead is the function player_move itself,
-
-    if random_selection():
-        playerOne = player_move
-        playerTwo = computer_AI
-    else:
-        playerTwo = player_move
-        playerOne = computer_AI
-    while True: ...
-
-    or is there a way to make this work? Or better a way so I only need one loop (instead of two/three)?
-    """
-
     board = [["","",""],["","",""],["","",""]]
     turn = 1
     display_board(board)
-    if game_type():
-        if random_selection():
-            while True:
-                make_move(board,turn,player_move(board,turn))
-                display_board(board)
-                if is_winner(board,turn):
-                    print "Player %s wins!! " % (turn)
-                    return
-                if tie(board):
-                    print "Tie!"
-                    return
-                turn = other_player(turn)
-                make_move(board, turn, computer_AI(board,turn))
-                if is_winner(board,turn):
-                    print "Player %s wins!! " % (turn)
-                    return
-                if tie(board):
-                    print "Tie!"
-                    return
-                display_board(board)
-                turn = other_player(turn)
-        else:
-            while True:
-                make_move(board, turn, computer_AI(board,turn))
-                display_board(board)
-                if is_winner(board,turn):
-                    print "Player %s wins!! " % (turn)
-                    return
-                if tie(board):
-                    print "Tie!"
-                    return
-                turn = other_player(turn)
-                make_move(board,turn,player_move(board,turn))
-                display_board(board)
-                if is_winner(board,turn):
-                    print "Player %s wins!! " % (turn)
-                    return
-                if tie(board):
-                    print "Tie! "
-                    return
-                turn = other_player(turn)
+    if game_type:
+        players = (player_move, computer_AI) if random_selection() else (computer_AI, player_move)
     else:
-        while True:
-            make_move(board,turn,player_move(board,turn))
-            display_board(board)
-            if is_winner(board,turn):
-                print "Player %s wins!! " % (turn)
-                return
-            if tie(board):
-                print "Tie!"
-                return
-            turn = other_player(turn)
+        players = player_move, player_move
+
+    while True:
+        make_move(board, turn, players[turn-1](board,turn))
+        display_board(board)
+        if is_winner(board,turn):
+            print "Player %s wins!! " % (turn)
+            return
+        if tie(board):
+            print "Tie!"
+            return
+        turn = other_player(turn)
 
 def is_winner(board,turn):
     for e in range(0,3):
