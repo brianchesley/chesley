@@ -7,8 +7,8 @@ def display_board(board):
     print " ".join(board)
 
 def other_player(turn):
-    return 3-turn
-    
+    return 3 - turn
+
 def player_move(board,turn):
     row = int(raw_input("what row would you like player %s? " % (turn,)))
     column = int(raw_input("what column would you like player %s? " % (turn,)))
@@ -42,7 +42,7 @@ def main():
     player1 player 2 variables depending upon random selection, but every time I did this 
     I got an infinite loop that kept printing out the game board after 1 "correct" interation
     code below
-    
+
     if random_selection():
         playerOne = player_move(board,turn)
         playerTwo = computer_AI(board,turn)
@@ -50,15 +50,15 @@ def main():
         playerTwo = player_move(board,turn)
         playerOne = computer_AI(board,turn)
     while True: ...
-    
+
     or is there a way to make this work? Or better a way so I only need one loop (instead of two/three)?
     """
-    
+
     board = [["","",""],["","",""],["","",""]]
     turn = 1
     display_board(board)
     if game_type():
-        if random_selection():            
+        if random_selection():
             while True:
                 make_move(board,turn,player_move(board,turn))
                 display_board(board)
@@ -98,7 +98,6 @@ def main():
                     print "Tie! "
                     return
                 turn = other_player(turn)
-            
     else:
         while True:
             make_move(board,turn,player_move(board,turn))
@@ -111,26 +110,26 @@ def main():
                 return
             turn = other_player(turn)
 
-def is_winner(board,turn):    
+def is_winner(board,turn):
     for e in range(0,3):
         if board[0][e] == board[1][e] == board[2][e] == turn\
         or board[e][0] == board[e][1] == board [e][2] == turn\
         or board[0][0] == board[1][1] == board[2][2] == turn\
         or board[0][2] == board[1][1] == board[2][0] == turn:
             return True
-    
+
 def tie(board):
     count = 0
     for row in board:
         count += row.count("")
     if count == 0:
         return True
-        
+
 def two_of_three(board, turn):
     """
     I coded this up two different ways...Is there a reason to prefer one over the other?
     """
-    
+
     gamelist = []
     row1 = board[0]
     row2 = board[1]
@@ -154,7 +153,7 @@ def two_of_three(board, turn):
         return gamelist
     else:
         return False
-"""    
+"""
     for ways in wins:
         winsPosition = winsPosition + 1
         count = 0
@@ -176,17 +175,17 @@ def AImove(gamelist):
     """
     for some reason the statements like this: if 3 >= gamelist[1] >= 5: didn't work for me
     What am I missing here?
-    
+
     """
     if gamelist[1] == 5 or gamelist[1] == 4 or gamelist[1] == 3:
         return [gamelist[0].index(""), gamelist[1]-3]
-        
+
     elif gamelist[1] == 0 or gamelist[1] == 1 or gamelist[1] == 2:
         return [gamelist[1], gamelist[0].index("")]
-    
+
     elif gamelist[1] == 6:
         return [gamelist[0].index(""), gamelist[0].index("")]
-    
+
     elif gamelist[1] == 7:
         return [gamelist[0].index(""), 2 - gamelist[0].index("")]
     else:
@@ -194,13 +193,13 @@ def AImove(gamelist):
 def look_ahead(board,turn):
     """
     checks moves one ahead for double way win
-    
+
     I initially wanted to have the list reset to the actual board after each iteration,
-    but this didn't work hence the last line in the loop. 
-    
+    but this didn't work hence the last line in the loop.
+
     I also tried not to index like we talked about, but I couldn't get the code to work. Any suggestions?
-    
-    
+
+
     look_ahead_list = list(board)
     move = []
     for row in board:
@@ -217,7 +216,7 @@ def look_ahead(board,turn):
     else:
         return False
     """
-    
+
     look_ahead_list = list(board)
     move = []
     for row in range(3):
@@ -233,7 +232,7 @@ def look_ahead(board,turn):
         return move
     else:
         return False
-        
+
 def computer_AI(board,turn):
     center = [1,1]
     if two_of_three(board, turn) != False:
