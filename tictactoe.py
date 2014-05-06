@@ -4,10 +4,8 @@ import collections
 
 def display_board(board):
     print
-    for row in board:
-        print row
-##  I tried to have line 7 as: print " ".join(row), but I got an error
-        
+    print " ".join(board)
+
 def other_player(turn):
     return 3-turn
     
