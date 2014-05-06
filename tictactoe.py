@@ -25,9 +25,8 @@ def game_type():
         return True
 
 def random_selection():
-    numchoice = input("Choose a number 1 or 2 to go first ")
-    number = random.randrange(1,3)
-    if numchoice == number:
+    input("Choose a number 1 or 2 to go first ")
+    if random.randrange(0,2):
         print "You got it. Move first "
         return True
     else:
