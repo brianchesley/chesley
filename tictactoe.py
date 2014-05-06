@@ -50,6 +50,17 @@ def main():
         playerOne = computer_AI(board,turn)
     while True: ...
 
+    The problem with this code is that you're calling the function player_move, which returns a move!
+    What you want instead is the function player_move itself,
+
+    if random_selection():
+        playerOne = player_move
+        playerTwo = computer_AI
+    else:
+        playerTwo = player_move
+        playerOne = computer_AI
+    while True: ...
+
     or is there a way to make this work? Or better a way so I only need one loop (instead of two/three)?
     """
 
