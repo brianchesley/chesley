@@ -93,12 +93,13 @@ def two_of_three(board, turn):
             gamelist.append(way)
     return gamelist
 """
+    This one looked simpler to me before I change the one above - so I liked it better
     for ways in wins:
         winsPosition = winsPosition + 1
         count = 0
         blankcount = 0
-        for way in ways:
-            if way == turn:
+        for way in ways: # I think "way" is completely the wrong variable name here
+            if way == turn:  # and is misleading and confusing. You mean spot, value, move, piece, sign, something like that.
                 count = count + 1
             if way == "":
                 blankcount = blankcount + 1
