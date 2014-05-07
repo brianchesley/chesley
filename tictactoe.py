@@ -122,8 +122,9 @@ def computer_AI(board,turn):
         return AImove(two_of_three(board, 3-turn))
     elif board[1][1] == "":
         return center
-    elif look_ahead(board,turn):
-        return look_ahead(board,turn)
+    elif look_ahead(board,turn): # if this gets expensive or we ever start to care about performance,
+        return look_ahead(board,turn) # this is the kind of thing we should eliminate - we don't need
+                                      # to call this function twice
     elif look_ahead(board, 3-turn):
         return look_ahead(board, 3-turn)
     else:
