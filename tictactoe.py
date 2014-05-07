@@ -77,26 +77,21 @@ def tie(board):
 
 def two_of_three(board, turn):
     """
-    I coded this up two different ways...Is there a reason to prefer one over the other?
+    Return list of spots for which one move would win
     """
 
     gamelist = []
-    columns = zip(*board)
-    d1 = [board[0][0], board[1][1], board[2][2]]
-    d2 = [board[0][2], board[1][1], board[2][0]]
-    wins = board + columns + [d1, d2]
-    winsPosition = 0
+    row_ways = [zip(row, range(3)) for row in range(3)]
+    column_ways = zip(*row_ways)
+    d1 = [(0, 0), (1, 1), (2, 2)]
+    d2 = [(0, 2), (1, 1), (2, 0)]
+    wins = row_ways + column_ways + [d1, d2]
 
     for way in wins:
-        winsPosition = winsPosition + 1
-        counter = collections.Counter(way)
+        counter = collections.Counter(board[spot[0]][spot[1]] for spot in way)
         if counter[turn] == 2 and counter[""] == 1:
             gamelist.append(way)
-            gamelist.append(winsPosition-1)
-    if gamelist:
-        return gamelist
-    else:
-        return False
+    return gamelist
 """
     for ways in wins:
         winsPosition = winsPosition + 1
@@ -116,15 +111,6 @@ def two_of_three(board, turn):
         return False
 """
 def AImove(gamelist):
-    """
-    for some reason the statements like this: if 3 >= gamelist[1] >= 5: didn't work for me
-    What am I missing here?
-
-    If 3 >= gamelist[1] >= 5 is what you had before, then that didn't work because
-    there are no numbers that are both less than or equal to 3, and greater than or equal to 5
-    3 <= gamelist[1] <= 5 should have worked though
-
-    """
     if gamelist[1] == 5 or gamelist[1] == 4 or gamelist[1] == 3:
         return [gamelist[0].index(""), gamelist[1]-3]
 
