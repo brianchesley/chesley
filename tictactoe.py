@@ -115,7 +115,23 @@ def look_ahead(board,turn):
     for row in board:
         for value in row:
             if value == "":
-                value = turn
+                value = turn  # this line right here doesn't do what it looks like you thought it did -
+                              # have you worked with other languages before Python? It looks like you're
+                              # expecting code like
+                              x = [1, 2, 3]
+                              a = x[0]
+                              a = 4
+                              # to produce
+                              print x
+                              # [4, 2, 3]
+
+                              # but this is absolutely *not* how Python works.
+                              # similarly,
+                              for value in [1,2,3]:
+                                  value = 10
+                              # does *not* change the original list! It just changes what the name 'value' refers to.
+
+
                 if two_of_three(look_ahead_list,turn) != False:
                     if len(two_of_three(look_ahead_list,turn)) > 3: 
                         move.append(row)
