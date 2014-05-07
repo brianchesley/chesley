@@ -81,23 +81,17 @@ def two_of_three(board, turn):
     """
 
     gamelist = []
-    row1 = board[0]
-    row2 = board[1]
-    row3 = board[2]
     columns = zip(*board)
-    column1 = columns[0]
-    column2 = columns[1]
-    column3 = columns[2]
     d1 = [board[0][0], board[1][1], board[2][2]]
     d2 = [board[0][2], board[1][1], board[2][0]]
-    wins = [row1, row2, row3, column1, column2, column3, d1, d2]
+    wins = board + columns + [d1, d2]
     winsPosition = 0
 
-    for ways in wins:
+    for way in wins:
         winsPosition = winsPosition + 1
-        counter = collections.Counter(ways)
+        counter = collections.Counter(way)
         if counter.get(turn) == 2 and counter.get("") == 1:
-            gamelist.append(ways)
+            gamelist.append(way)
             gamelist.append(winsPosition-1)
     if gamelist:
         return gamelist
