@@ -120,6 +120,10 @@ def AImove(gamelist):
     for some reason the statements like this: if 3 >= gamelist[1] >= 5: didn't work for me
     What am I missing here?
 
+    If 3 >= gamelist[1] >= 5 is what you had before, then that didn't work because
+    there are no numbers that are both less than or equal to 3, and greater than or equal to 5
+    3 <= gamelist[1] <= 5 should have worked though
+
     """
     if gamelist[1] == 5 or gamelist[1] == 4 or gamelist[1] == 3:
         return [gamelist[0].index(""), gamelist[1]-3]
