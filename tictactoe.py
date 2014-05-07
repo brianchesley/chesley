@@ -91,8 +91,8 @@ def two_of_three(board, turn):
         values = [board[spot[0]][spot[1]] for spot in way]
         counter = collections.Counter(values)
         if counter[turn] == 2 and counter[""] == 1:
-            gamelist.append(way[values.index("")])
-    return gamelist
+            return way[values.index("")]
+    return False
 
 def AImove(gamelist):
     if gamelist:
@@ -101,63 +101,18 @@ def AImove(gamelist):
         return False
 
 def look_ahead(board,turn):
-    """
-    checks moves one ahead for double way win
-
-    I initially wanted to have the list reset to the actual board after each iteration,
-    but this didn't work hence the last line in the loop.
-
-    I also tried not to index like we talked about, but I couldn't get the code to work. Any suggestions?
-
-
-    look_ahead_list = list(board)
-    move = []
-    for row in board:
-        for value in row:
-            if value == "":
-                value = turn  # this line right here doesn't do what it looks like you thought it did -
-                              # have you worked with other languages before Python? It looks like you're
-                              # expecting code like
-                              x = [1, 2, 3]
-                              a = x[0]
-                              a = 4
-                              # to produce
-                              print x
-                              # [4, 2, 3]
-
-                              # but this is absolutely *not* how Python works.
-                              # similarly,
-                              for value in [1,2,3]:
-                                  value = 10
-                              # does *not* change the original list! It just changes what the name 'value' refers to.
-
-
-                if two_of_three(look_ahead_list,turn) != False:
-                    if len(two_of_three(look_ahead_list,turn)) > 3: 
-                        move.append(row)
-                        move.append(value)
-                value = ""
-    if len(move) > 0:
-        return move
-    else:
-        return False
-    """
-
+    """Returns a move that would cause the player 'turn' to have two in a row with the third blank, or False"""
     look_ahead_list = list(board)
     move = []
     for row in range(3):
-        for value in range(3):
-            if look_ahead_list[row][value] == "":
-                look_ahead_list[row][value] = turn
-                if two_of_three(look_ahead_list,turn) != False:
-                    if len(two_of_three(look_ahead_list,turn)) > 3: 
-                        move.append(row)
-                        move.append(value)
-                look_ahead_list[row][value] = ""
-    if len(move) > 0:
-        return move
-    else:
-        return False
+        for column in range(3):
+            if look_ahead_list[row][column] == "":
+                look_ahead_list[row][column] = turn
+                move = two_of_three(look_ahead_list, turn)
+                look_ahead_list[row][column] = ""
+                if move:
+                    return move
+    return False
 
 def computer_AI(board,turn):
     center = [1,1]
