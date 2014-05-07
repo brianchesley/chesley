@@ -62,10 +62,11 @@ def main():
 def is_winner(board,turn):
     for e in range(0,3):
         if (board[0][e] == board[1][e] == board[2][e] == turn
-            or board[e][0] == board[e][1] == board [e][2] == turn
-            or board[0][0] == board[1][1] == board[2][2] == turn
-            or board[0][2] == board[1][1] == board[2][0] == turn):
+            or board[e][0] == board[e][1] == board[e][2] == turn):
             return True
+    if (board[0][0] == board[1][1] == board[2][2] == turn
+        or board[0][2] == board[1][1] == board[2][0] == turn):
+        return True
 
 def tie(board):
     count = 0
