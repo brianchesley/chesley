@@ -46,7 +46,10 @@ def main():
         players = player_move, player_move
 
     while True:
+
+        #turns are 1-indexed, while the players array is 0-indexed
         make_move(board, turn, players[turn-1](board,turn))
+
         display_board(board)
         if is_winner(board,turn):
             print "Player %s wins!! " % (turn)
@@ -58,10 +61,10 @@ def main():
 
 def is_winner(board,turn):
     for e in range(0,3):
-        if board[0][e] == board[1][e] == board[2][e] == turn\
-        or board[e][0] == board[e][1] == board [e][2] == turn\
-        or board[0][0] == board[1][1] == board[2][2] == turn\
-        or board[0][2] == board[1][1] == board[2][0] == turn:
+        if (board[0][e] == board[1][e] == board[2][e] == turn
+            or board[e][0] == board[e][1] == board [e][2] == turn
+            or board[0][0] == board[1][1] == board[2][2] == turn
+            or board[0][2] == board[1][1] == board[2][0] == turn):
             return True
 
 def tie(board):
