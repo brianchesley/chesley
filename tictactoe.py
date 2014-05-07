@@ -88,43 +88,18 @@ def two_of_three(board, turn):
     wins = row_ways + column_ways + [d1, d2]
 
     for way in wins:
-        counter = collections.Counter(board[spot[0]][spot[1]] for spot in way)
+        values = [board[spot[0]][spot[1]] for spot in way]
+        counter = collections.Counter(values)
         if counter[turn] == 2 and counter[""] == 1:
-            gamelist.append(way)
+            gamelist.append(way[values.index("")])
     return gamelist
-"""
-    This one looked simpler to me before I change the one above - so I liked it better
-    for ways in wins:
-        winsPosition = winsPosition + 1
-        count = 0
-        blankcount = 0
-        for way in ways: # I think "way" is completely the wrong variable name here
-            if way == turn:  # and is misleading and confusing. You mean spot, value, move, piece, sign, something like that.
-                count = count + 1
-            if way == "":
-                blankcount = blankcount + 1
-            if count == 2 and blankcount == 1:
-                gamelist.append(ways)
-                gamelist.append(winsPosition-1)
-    if len(gamelist) > 0:
-        return gamelist
-    else:
-        return False
-"""
+
 def AImove(gamelist):
-    if gamelist[1] == 5 or gamelist[1] == 4 or gamelist[1] == 3:
-        return [gamelist[0].index(""), gamelist[1]-3]
-
-    elif gamelist[1] == 0 or gamelist[1] == 1 or gamelist[1] == 2:
-        return [gamelist[1], gamelist[0].index("")]
-
-    elif gamelist[1] == 6:
-        return [gamelist[0].index(""), gamelist[0].index("")]
-
-    elif gamelist[1] == 7:
-        return [gamelist[0].index(""), 2 - gamelist[0].index("")]
+    if gamelist:
+        return gamelist[0]
     else:
         return False
+
 def look_ahead(board,turn):
     """
     checks moves one ahead for double way win
