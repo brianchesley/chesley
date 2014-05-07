@@ -80,8 +80,7 @@ def two_of_three(board, turn):
     Return list of spots for which one move would win
     """
 
-    gamelist = []
-    row_ways = [zip(row, range(3)) for row in range(3)]
+    row_ways = [zip([row] * 3, range(3)) for row in range(3)]
     column_ways = zip(*row_ways)
     d1 = [(0, 0), (1, 1), (2, 2)]
     d2 = [(0, 2), (1, 1), (2, 0)]
@@ -116,10 +115,10 @@ def look_ahead(board,turn):
 
 def computer_AI(board,turn):
     center = [1,1]
-    if two_of_three(board, turn) != False:
-        return AImove(two_of_three(board, turn))
-    elif two_of_three(board, 3-turn) != False:
-        return AImove(two_of_three(board, 3-turn))
+    if two_of_three(board, turn):
+        return two_of_three(board, turn)
+    elif two_of_three(board, 3-turn):
+        return two_of_three(board, 3-turn)
     elif board[1][1] == "":
         return center
     elif look_ahead(board,turn): # if this gets expensive or we ever start to care about performance,
