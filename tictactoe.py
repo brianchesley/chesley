@@ -90,7 +90,7 @@ def two_of_three(board, turn):
     for way in wins:
         winsPosition = winsPosition + 1
         counter = collections.Counter(way)
-        if counter.get(turn) == 2 and counter.get("") == 1:
+        if counter[turn] == 2 and counter[""] == 1:
             gamelist.append(way)
             gamelist.append(winsPosition-1)
     if gamelist:
